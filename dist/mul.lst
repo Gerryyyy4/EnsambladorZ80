@@ -1,0 +1,26 @@
+0000              CPU "Z80.tbl"
+0000              HOF "INT8"
+
+1000              ORG 1000H
+
+1000 3E05         LD A, 05; Carga el valor en la dirección de memoria 1001H en el registro A
+1002 281B         JR Z, eti1
+1004 320001         LD (0100H), A; Carga el valor de A en el registro B
+1007 3A0010         LD A, (1000H); Carga el valor en la dirección de memoria 1000H en el registro A
+100A 50           LD D, B; Carga el valor de B en el registro D
+100B 47           LD B, A ; Carga el valor de A en el registro C
+100C           eti2:; Etiqueta eti2
+100C C30C10         JP eti2
+100F CA1F10         JP Z, eti1
+1012 DD5605         LD D, (IX + 05)
+1015 210010         LD HL, 1000H; Carga el valor de A en el registro D
+1018 0E03         LD C, 03; Carga el valor de B en el registro C
+101A           eti3:; Etiqueta eti3
+101A 78           LD A, B; Carga el valor 0 en el registro A
+101B           eti4:; Etiqueta eti4
+101B C604         ADD A, 04; Suma el valor de D al registro A
+101D FE00           CP 00; Decrementa el valor de C
+101F           eti1:; Etiqueta eti1
+101F 76           HALT; Detiene la CPU
+0000              END
+100C eti2             101A eti3             101B eti4             101F eti1             
